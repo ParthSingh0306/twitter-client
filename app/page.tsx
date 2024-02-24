@@ -1,6 +1,6 @@
 "use client";
 import { BsTwitterX } from "react-icons/bs";
-import { BiHomeCircle } from "react-icons/bi";
+import { BiHomeCircle, BiImageAlt } from "react-icons/bi";
 import { FiSearch } from "react-icons/fi";
 import { RiNotificationLine } from "react-icons/ri";
 import { MdOutlineEmail } from "react-icons/md";
@@ -15,7 +15,7 @@ import toast from "react-hot-toast";
 import { graphQLClient } from "@/clients/api";
 import { verifyUserGoogleTokenQuery } from "@/graphql/query/user";
 import { useCurrentUser } from "@/hooks/user";
-import { QueryClient, useQueryClient } from "@tanstack/react-query";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface TwitterSidebarButton {
   title: string;
@@ -52,7 +52,13 @@ const sidebarMenuItems: TwitterSidebarButton[] = [
 export default function Home() {
   const { user } = useCurrentUser();
   const queryClient = useQueryClient();
-  console.log(user);
+
+  const handleSelectImage = useCallback(() => {
+    const input = document.createElement("input");
+    input.setAttribute("type", "file");
+    input.setAttribute("accept", "image/*");
+    input.click();
+  }, []);
 
   const handleLoginWithGoogle = useCallback(
     async (cred: CredentialResponse) => {
@@ -111,12 +117,47 @@ export default function Home() {
                 />
               )}
               <div>
-              <h3 className="text-lg">{user.firstName} {user.lastName}</h3>
+                <h3 className="text-lg">
+                  {user.firstName} {user.lastName}
+                </h3>
               </div>
             </div>
           )}
         </div>
         <div className="col-span-5 border-l-[0.8px] border-r-[0.8px] h-screen overflow-scroll no-scrollbar border-gray-600 transition-all">
+          <div>
+            <div className="border border-l-0 border-b-0 border-r-0 border-gray-600 p-4 transition-all hover:bg-gray-900 cursor-pointer">
+              <div className="grid grid-cols-12 gap-2">
+                <div className="col-span-1">
+                  {user?.profileImageURL && (
+                    <Image
+                      className="rounded-full"
+                      src={user?.profileImageURL}
+                      alt="user-image"
+                      height={60}
+                      width={60}
+                    />
+                  )}
+                </div>
+                <div className="col-span-11">
+                  <textarea
+                    className="w-full bg-transparent text-lg px-3 border-b border-slate-700 no-scrollbar"
+                    placeholder="What's Happening?"
+                    rows={3}
+                  ></textarea>
+                  <div className="mt-2 flex justify-between items-center">
+                    <BiImageAlt
+                      onClick={handleSelectImage}
+                      className="text-xl"
+                    />
+                    <button className="bg-[#1d9bf0] font-semibold rounded-full text-sm px-4 py-2">
+                      Tweet
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
           <FeedCard />
           <FeedCard />
           <FeedCard />

@@ -8,7 +8,7 @@ import { LuUpload } from "react-icons/lu";
 
 const FeedCard: React.FC = () => {
   return (
-    <div className="border border-l-0 border-b-0 border-r-0 border-gray-600 p-4 transition-all hover:bg-gray-950 cursor-pointer">
+    <div className="border border-l-0 border-b-0 border-r-0 border-gray-600 p-4 transition-all hover:bg-gray-900 cursor-pointer">
       <div className="grid grid-cols-12 gap-2">
         <div className="col-span-1">
           <Image

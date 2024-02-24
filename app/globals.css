@@ -41,3 +41,7 @@ body {
     scrollbar-width: none;  /* Firefox */
 }
 }
+
+*:focus{
+  outline: none
+}
