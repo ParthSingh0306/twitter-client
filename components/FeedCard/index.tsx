@@ -33,6 +33,9 @@ const FeedCard: React.FC<FeedCardProps> = (props) => {
           <p className="text-xs">
             {data.content}
           </p>
+          {
+            data.imageURL && <Image src={data.imageURL} alt="tweet-image" width={300} height={300} />
+          }
           <div className="flex justify-between items-center mt-5 p-1 w-[90%]">
             <div className="p-1.5 rounded-full hover:bg-gray-800">
                 <BiMessageRounded />
