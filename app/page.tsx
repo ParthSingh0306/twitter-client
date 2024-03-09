@@ -13,10 +13,14 @@ import { getSignedURLForTweetQuery } from "@/graphql/query/tweet";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-export default function Home() {
+interface HomeProps {
+  tweets?: Tweet[];
+}
+
+export default function Home(props: HomeProps) {
   const { user } = useCurrentUser();
-  const { tweets = [] } = useGetAllTweets();
-  const { mutate } = useCreateTweet();
+  const { tweets = props.tweets as Tweet[] } = useGetAllTweets();
+  const { mutateAsync } = useCreateTweet();
 
   const [content, setContent] = useState("");
   const [imageURL, setImageURL] = useState("");
@@ -58,11 +62,13 @@ export default function Home() {
   }, [handleInputChangeFile]);
 
   const handleCreateTweet = useCallback(() => {
-    mutate({
+    mutateAsync({
       content,
       imageURL
     });
-  }, [content, mutate, imageURL]);
+    setContent("");
+    setImageURL("");
+  }, [content, mutateAsync, imageURL]);
 
   return (
     <div>

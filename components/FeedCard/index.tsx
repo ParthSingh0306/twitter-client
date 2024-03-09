@@ -6,15 +6,14 @@ import { AiOutlineRetweet } from "react-icons/ai";
 import { FaRegHeart } from "react-icons/fa6";
 import { LuUpload } from "react-icons/lu";
 import { Tweet } from "@/gql/graphql";
+import Link from "next/link";
 
 interface FeedCardProps {
   data: Tweet
 }
 
 const FeedCard: React.FC<FeedCardProps> = (props) => {
-
   const { data } = props
-
 
   return (
     <div className="border border-l-0 border-b-0 border-r-0 border-gray-600 p-4 transition-all hover:bg-gray-900 cursor-pointer">
@@ -29,7 +28,9 @@ const FeedCard: React.FC<FeedCardProps> = (props) => {
           />}
         </div>
         <div className="col-span-11 ml-1">
-          <h1>{data.author?.firstName} {data.author?.lastName}</h1>
+          <Link href={`/profile/${data.author?.id}`}>
+            <h1>{data.author?.firstName} {data.author?.lastName}</h1>
+          </Link>
           <p className="text-xs">
             {data.content}
           </p>
