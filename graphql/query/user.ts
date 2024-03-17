@@ -1,8 +1,7 @@
 import { graphql } from "../../gql";
 
 export const verifyUserGoogleTokenQuery = graphql(
-  `
-    #graphql
+  `#graphql
     query verifyUserGoogleToken($token: String!) {
       verifyGoogleToken(token: $token)
     }
@@ -10,8 +9,7 @@ export const verifyUserGoogleTokenQuery = graphql(
 );
 
 export const getCurrentUserQuery = graphql(
-  `
-    #graphql
+  `#graphql
     query GetCurrentUser {
       getCurrentUser {
         id
@@ -19,6 +17,24 @@ export const getCurrentUserQuery = graphql(
         lastName
         email
         profileImageURL
+        recommendedUsers {
+          id
+          firstName
+          lastName
+          profileImageURL
+        }
+        followers {
+          id
+          firstName
+          lastName
+          profileImageURL
+        }
+        following {
+          id
+          firstName
+          lastName
+          profileImageURL
+        }
         tweets {
           id
           content
@@ -42,11 +58,13 @@ export const getUserByIdQuery = graphql(
         lastName
         profileImageURL
         followers {
+          id
           firstName
           lastName
           profileImageURL
         }
         following {
+          id
           firstName
           lastName
           profileImageURL
