@@ -142,12 +142,12 @@ const TwitterLayout: React.FC<TwitterLayoutProps> = (props) => {
         </div>
         <div className="col-span-0 sm:col-span-3 p-3">
           {!user ? (
-            <div className="p-3 bg-slate-700 rounded-lg">
-              <h1 className="my-1 text-xl font-semibold">New to Twitter?</h1>
+            <div className="p-3 hidden lg:block bg-slate-700 rounded-lg">
+              <h1 className="my-1 hidden lg:block text-xl font-semibold">New to Twitter?</h1>
               <GoogleLogin onSuccess={handleLoginWithGoogle} />
             </div>
           ) : (
-            <div className="px-4 py-3 bg-slate-800 rounded-lg">
+            <div className="px-4 hidden lg:block py-3 bg-slate-800 rounded-lg">
               <h1 className="my-1 text-xl font-semibold mb-5">Users you may Know</h1>
               {user?.recommendedUsers?.map((el) => (
                 <div className="flex items-center gap-3 mt-2" key={el?.id}>
