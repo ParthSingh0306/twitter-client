@@ -16,13 +16,9 @@ import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
 import { useQueryClient } from "@tanstack/react-query";
 import { verifyUserGoogleTokenQuery } from "@/graphql/query/user";
 
-interface HomeProps {
-  tweets?: Tweet[];
-}
-
-export default function Home(props: HomeProps) {
+const IndexPage = () => {
   const { user } = useCurrentUser();
-  const { tweets = props.tweets as Tweet[] } = useGetAllTweets();
+  const { tweets } = useGetAllTweets();
   const { mutateAsync } = useCreateTweet();
   const queryClient = useQueryClient();
 
@@ -162,3 +158,5 @@ export default function Home(props: HomeProps) {
     </div>
   );
 }
+
+export default IndexPage;
